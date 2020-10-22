@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
+# from pathlib import Path
 import os
+import djongo
+import json
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
@@ -23,10 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'e8k!!n8&903v4j1-gnb#7ot0&2ngku8i#h+iu%il71wryyudxv'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ['DEBUG']
+DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -73,15 +75,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cosmos_project.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR+'/db.sqlite3',
-    }
+    'default':
+        {
+            'ENGINE': 'djongo',
+            'CLIENT': { 'name': 'sampledb',
+                        'host': 'mongodb://levelpa:3TWgI6tmExh299YmKPoWPo77tWJfVrpBNTFjGQPqVE9YuwP6rHVMLw599emHqWq09rgcydsWVrjPsJMVJWrHqQ==@levelpa.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@levelpa@',
+                        'username': 'levelpa',
+                        'password': '3TWgI6tmExh299YmKPoWPo77tWJfVrpBNTFjGQPqVE9YuwP6rHVMLw599emHqWq09rgcydsWVrjPsJMVJWrHqQ==',
+                        'authMechanism': 'SCRAM-SHA-1'
+                       }
+        }
 }
 
 
