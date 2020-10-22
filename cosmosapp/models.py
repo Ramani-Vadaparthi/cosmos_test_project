@@ -63,7 +63,7 @@ class Post(models.Model):
 
 
 class Blog(models.Model):
-    blog = models.CharField(max_length=50)
+    blogs = models.CharField(max_length=50)
     texts = models.TextField(max_length=60)
 
     class Meta:

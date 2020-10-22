@@ -25,10 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = os.environ['DEBUG']
 
 ALLOWED_HOSTS = []
 
@@ -81,12 +81,12 @@ WSGI_APPLICATION = 'cosmos_project.wsgi.application'
 DATABASES = {
     'default':
         {
-            'ENGINE': 'djongo',
-            'CLIENT': { 'name': 'sampledb',
-                        'host': 'mongodb://levelpa:3TWgI6tmExh299YmKPoWPo77tWJfVrpBNTFjGQPqVE9YuwP6rHVMLw599emHqWq09rgcydsWVrjPsJMVJWrHqQ==@levelpa.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@levelpa@',
-                        'username': 'levelpa',
-                        'password': '3TWgI6tmExh299YmKPoWPo77tWJfVrpBNTFjGQPqVE9YuwP6rHVMLw599emHqWq09rgcydsWVrjPsJMVJWrHqQ==',
-                        'authMechanism': 'SCRAM-SHA-1'
+            'ENGINE': os.environ['ENGINE'],
+            'CLIENT': { 'name': os.environ['DATABASE_NAME'],
+                        'host': os.environ['HOST'],
+                        'username': os.environ['USER'],
+                        'password': os.environ['PASSWORD'],
+                        'authMechanism': os.environ['AUTHMECHANISM']
                        }
         }
 }
